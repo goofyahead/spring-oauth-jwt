@@ -23,10 +23,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .username("user")
                 .password(encoder.encode("secret"))
                 .roles("USER").build();
+
         UserDetails userAdmin = User.builder()
                 .username("admin")
                 .password(encoder.encode("secret"))
                 .roles("ADMIN").build();
+        
         return new InMemoryUserDetailsManager(user, userAdmin);
     }
 

@@ -1,0 +1,6 @@
+zuul:
+#  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    user-service:
+      path: /users/**
+      url: http://localhost:8673/
