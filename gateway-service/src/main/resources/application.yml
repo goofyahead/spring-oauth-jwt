@@ -4,3 +4,15 @@ zuul:
     user-service:
       path: /users/**
       url: http://localhost:8673/
+
+#security:
+#  oauth2:
+#    sso:
+#      loginPath: /login
+#    client:
+#      accessTokenUri: http://localhost:9999/oauth/token
+#      userAuthorizationUri: http://localhost:9999/oauth/authorize
+#      clientId: gateway
+#      clientSecret: secretgateway
+#    resource:
+#      user-info-uri: http://localhost:9999/me
