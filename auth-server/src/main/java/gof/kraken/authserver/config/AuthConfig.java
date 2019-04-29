@@ -35,8 +35,8 @@ public class AuthConfig extends AuthorizationServerConfigurerAdapter {
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "USER")
                 .scopes("read", "write")
                 .autoApprove(true)
-                .secret(encoder.encode("password"));
-//                .redirectUris("http://localhost:9999/login"); TODO check what happens with this redirect uri
+                .secret(encoder.encode("password"))
+                .redirectUris("http://localhost:8080/login");
     }
 
     @Override

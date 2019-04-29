@@ -1,8 +1,12 @@
 server:
   port: 9999
+  use-forward-headers: false
+  servlet:
+    context-path: /uaa
 
 logging:
   level:
+    root: DEBUG
     org:
       springframework:
         security: DEBUG

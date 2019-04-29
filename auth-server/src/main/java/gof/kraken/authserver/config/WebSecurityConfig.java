@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .username("admin")
                 .password(encoder.encode("secret"))
                 .roles("ADMIN").build();
-        
+
         return new InMemoryUserDetailsManager(user, userAdmin);
     }
 
@@ -37,5 +37,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
 }
