@@ -1,0 +1,35 @@
+version: '2.1'
+services:
+  gateway-service:
+    image: gateway-service:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        SERVICE: gateway-service
+    environment:
+      - SECURITY_OAUTH2_INSTANCE_HOSTNAME
+    ports:
+      - 8080:8080
+
+  auth-server:
+    image: auth-server:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        SERVICE: auth-server
+    ports:
+      - 9999:9999
+
+  user-service:
+    image: user-service:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        SERVICE: user-service
+    environment:
+      - SECURITY_OAUTH2_INSTANCE_HOSTNAME
+    ports:
+      - 8763:8763
