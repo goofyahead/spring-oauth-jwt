@@ -10,7 +10,7 @@ public class UserController {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello, welcome home";
+        return "Hello, welcome user home";
     }
 
     @RequestMapping("/private")
