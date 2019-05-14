@@ -1,7 +1,7 @@
 server:
   port: 8673
-#  servlet:
-#    context-path: /users
+  servlet:
+    context-path: /users
 
 security:
   oauth2:
