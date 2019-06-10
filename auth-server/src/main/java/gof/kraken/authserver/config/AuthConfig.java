@@ -38,6 +38,7 @@ public class AuthConfig extends AuthorizationServerConfigurerAdapter {
                 .secret(encoder.encode("password"))
                 .redirectUris("http://localhost:8080/login")
                 .and()
+
                 .withClient("user-resource-client")
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "USER")

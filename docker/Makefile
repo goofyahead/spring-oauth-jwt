@@ -17,6 +17,10 @@ docker-clean:
 	docker container prune
 	docker image prune -a
 
+build: down project-build docker-build
+
+go: build start
+
 project-build:
 	cd ../auth-server && ./gradlew build
 	cd ../user-service && ./gradlew build

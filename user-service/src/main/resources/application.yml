@@ -1,15 +1,17 @@
 server:
   port: 8673
-#  servlet:
-#    context-path: /client
+  servlet:
+    context-path: /users
 
 security:
   oauth2:
-    client:
-      client-id: client
-      client-secret: secret
-      access-token-uri: http://localhost:9999/oauth/token
-      user-authorization-uri: http://localhost:9999/oauth/authorize
+#    sso:
+#      loginPath: /login
+#    client:
+#      client-id: user-resource-client
+#      client-secret: user-resource-password
+#      access-token-uri: http://${security.oauth2.instance.hostname:localhost}:9999/uaa/oauth/token
+#      user-authorization-uri: http://localhost:9999/uaa/oauth/authorize
     resource:
       jwt:
         key-value: |
@@ -22,3 +24,5 @@ security:
           HHTzA9oMUGVsM5OZlU16kG6n6oz9CEC4XKcZN2rzYGk38y/NKbS5kjsLRCFTiF/p
           2wIDAQAB
           -----END PUBLIC KEY-----
+      id: openid
+      serviceId: ${PREFIX:}resource

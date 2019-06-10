@@ -1,18 +1,47 @@
 zuul:
-#  sensitiveHeaders: Cookie,Set-Cookie
   routes:
     user-service:
+      sensitiveHeaders:
       path: /users/**
-      url: http://localhost:8673/
+      url: http://user-service:8673/
+      stripPrefix: false
+    oauth:
+      sensitiveHeaders:
+      path: /uaa/**
+      url: http://auth-server:9999/
+      stripPrefix: false
 
-#security:
-#  oauth2:
-#    sso:
-#      loginPath: /login
-#    client:
-#      accessTokenUri: http://localhost:9999/oauth/token
-#      userAuthorizationUri: http://localhost:9999/oauth/authorize
-#      clientId: gateway
-#      clientSecret: secretgateway
-#    resource:
-#      user-info-uri: http://localhost:9999/me
+security:
+  oauth2:
+    sso:
+      loginPath: /login
+    client:
+      client-id: client
+      client-secret: password
+      access-token-uri: http://${security.oauth2.instance.hostname:localhost}:9999/uaa/oauth/token
+#      access-token-uri: http://${security.oauth2.instance.hostname:localhost}:9999/uaa/fiesta/caliente
+      user-authorization-uri: http://localhost:9999/uaa/oauth/authorize
+#      user-authorization-uri: http://${security.oauth2.instance.hostname:localhost}:9999/uaa/fiesta/caliente
+    resource:
+      jwt:
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo+pMOAq3ZeuzL6Yu8OEA
+          7hbaJFm1rrOVkTcZzO7N5yLoT2RHgVEpm3AfrvMt6gQ7nHBw9Y1MSFNNz0TTxHsh
+          f17/Rj64Uvw6DCoW1kSs+CbBqmIvYHp13idhFIZjodNDsIGX3yqGb2ZF92YDHvGE
+          LnjuyMFJygeGyxv+iOXOyAoUxSQ25nbveYeUHTZ6ORG9Q5Cr0szJ+b1JBY0uj5bb
+          9FjggHlOdibrXE38UnDgBuQRoHTG5LMhZ3SY+Ei+Pb9pouQ6b7yygXzPaY2w5yQl
+          HHTzA9oMUGVsM5OZlU16kG6n6oz9CEC4XKcZN2rzYGk38y/NKbS5kjsLRCFTiF/p
+          2wIDAQAB
+          -----END PUBLIC KEY-----
+      id: openid
+      serviceId: ${PREFIX:}resource
+
+debug: true
+#trace: true
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix: trace
