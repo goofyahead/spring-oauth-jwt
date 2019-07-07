@@ -5,4 +5,4 @@ server:
 
 logging:
   level:
-    root: DEBUG
+    root: ERROR
