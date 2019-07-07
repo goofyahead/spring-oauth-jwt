@@ -31,7 +31,7 @@ public class AuthConfig extends AuthorizationServerConfigurerAdapter {
 
         clients.inMemory()
                 .withClient("client")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "USER")
                 .scopes("read", "write")
                 .autoApprove(true)
@@ -40,12 +40,19 @@ public class AuthConfig extends AuthorizationServerConfigurerAdapter {
                 .and()
 
                 .withClient("user-resource-client")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "USER")
                 .scopes("read", "write")
                 .autoApprove(true)
                 .secret(encoder.encode("user-resource-password"))
-                .redirectUris("http://localhost:8673/login");
+                .redirectUris("http://localhost:8673/login")
+
+                .and()
+                .withClient("machine2machine")
+                .authorizedGrantTypes("client_credentials")
+                .scopes("b2b-message-type-A")
+                .autoApprove(true)
+                .secret(encoder.encode("machinesecret"));
     }
 
     @Override

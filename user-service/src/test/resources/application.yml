@@ -1,0 +1,25 @@
+server:
+  port: 8673
+  servlet:
+    context-path: /users
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoOo+plDIE5n/sXS8K0zQ
+          AsuYPsHN1zUvPZwc5WvyNhzz+4+am79Fk+chbiXbbM0rY9E29zjxf/8RYEt/KdfX
+          lILRH1qv5dJcKNfOwUQ/TJqi9xfG1Yb1ucRgUFqQ0p7Yj0vV3tpLZpdaTkm3kkM0
+          aSgUqr31JPZmxiqamMVW5/dqCtQ8C0dLyY4KL+XcKMDS/BVmxfj1CVhfRuq5M6yW
+          kfOrcuisqd8tIPowEvnNycF25pWuRjUVA6Uyc5DI6hntsZIDAJhNjqstAH9aLRqh
+          gwKegqnR7BrOyN+mreCeU1UM3yHQsSxae/VKQikn2xU43JVF7apgkfuYLFgFMMqC
+          0wIDAQAB
+          -----END PUBLIC KEY-----
+      id: openid
+      serviceId: ${PREFIX:}resource
