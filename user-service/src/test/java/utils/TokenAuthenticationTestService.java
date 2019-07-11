@@ -19,10 +19,6 @@ public class TokenAuthenticationTestService {
 
     public static String createToken(String username, List<String> authorities) {
         Map<String, Object> claims = new HashMap<>();
-        Map<String, List<String>> permissions = new HashMap<>();
-        List<String> articlesPermissions = new LinkedList<>();
-        articlesPermissions.add("READ");
-        permissions.put("ARTICLES", articlesPermissions);
 
         // put your information into claim
         claims.put("id", "12345");
@@ -43,9 +39,6 @@ public class TokenAuthenticationTestService {
     }
 
     public static String createM2MToken(String username, String scope) {
-        Collection<String> permissions = new LinkedList<>();
-        permissions.add("READ_STUFF");
-
         Map<String, Object> claims = new HashMap<>();
 
         // put your information into claim

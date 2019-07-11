@@ -3,11 +3,12 @@ package gof.kraken.userservice;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import utils.TestAuthConfig;
 import utils.TokenAuthenticationTestService;
 
 import java.util.ArrayList;
@@ -19,16 +20,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-public class UserServiceApplicationTests {
+@WebMvcTest
+@Import(TestAuthConfig.class)
+
+public class UserServiceUnitTests {
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
-    public void contextLoads() {
-    }
+    public void contextLoads() {}
 
     @Test
     public void getUsersHomeNoAuth() throws Exception {
@@ -47,6 +48,7 @@ public class UserServiceApplicationTests {
     public void getUsersNeedAuth() throws Exception {
         List<String> roles = new ArrayList<>();
         roles.add("ROLE_USER");
+        roles.add("ROLE_ADMIN");
 
         String token = TokenAuthenticationTestService.createToken("john", roles);
         assertNotNull(token);
